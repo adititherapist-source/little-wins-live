@@ -77,3 +77,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+  /* ── Team Slider ── */
+  const slider = document.getElementById('teamSlider');
+  const dots   = document.querySelectorAll('.team-dot');
+  const prevBtn = document.getElementById('teamPrev');
+  const nextBtn = document.getElementById('teamNext');
+  let current = 0;
+  const total = document.querySelectorAll('.team-card').length;
+
+  function goTo(idx) {
+    current = (idx + total) % total;
+    slider.style.transform = `translateX(-${current * 100}%)`;
+    slider.style.transition = 'transform 0.45s cubic-bezier(0.34,1.1,0.64,1)';
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
+
+  // Swipe support for mobile
+  let touchStartX = 0;
+  if (slider) {
+    slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener('touchend',   e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+  }

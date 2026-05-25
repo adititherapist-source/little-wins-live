@@ -341,14 +341,23 @@ nav {
 }
 .founder-title { color: var(--teal); font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; }
 .founder-bio   { color: var(--text-mid); font-size: 0.95rem; line-height: 1.7; }
-.founder-creds { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.2rem; }
+.founder-creds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.2rem;
+  align-items: center;
+}
 .cred-badge {
   background: var(--white);
   color: var(--teal-dark);
-  font-weight: 700; font-size: 0.8rem;
-  padding: 5px 12px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 5px 14px;
   border-radius: 50px;
   border: 1.5px solid var(--teal);
+  white-space: nowrap;
+  display: inline-block;
 }
 .about-values {
   display: grid;
@@ -740,4 +749,132 @@ footer {
 }
 @media (max-width: 900px) {
   .turtle-strip { top: 100px; }
+}
+
+
+
+/* ── APPROACH PILLS (integrated care card) ── */
+.approach-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 50px;
+  display: inline-block;
+}
+.approach-pill.teal   { background: var(--teal-light);   color: var(--teal-dark); }
+.approach-pill.orange { background: var(--orange-light); color: var(--orange-dark); }
+.approach-pill.green  { background: var(--green-light);  color: var(--green); }
+
+/* ── TEAM SLIDER ── */
+.team-slider-wrap {
+  margin-top: 3rem;
+  position: relative;
+}
+.team-slider {
+  display: flex;
+  overflow: hidden;
+  gap: 0;
+}
+.team-card {
+  min-width: 100%;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  background: var(--white);
+  border-radius: 28px;
+  padding: 2.5rem;
+  border: 2px solid var(--teal-light);
+  box-shadow: 0 4px 24px rgba(26,142,142,0.08);
+  transition: transform 0.45s cubic-bezier(0.34,1.1,0.64,1);
+}
+.team-photo-wrap {
+  flex-shrink: 0;
+  width: 180px;
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 3px solid var(--teal-light);
+}
+.team-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.placeholder-photo {
+  background: var(--teal-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--teal);
+}
+.team-info { flex: 1; }
+.team-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  margin-bottom: 0.2rem;
+}
+.team-title {
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.team-bio {
+  color: var(--text-mid);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+.placeholder-card { border-style: dashed; border-color: var(--teal-light); }
+
+/* Slider controls */
+.team-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+.team-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--teal);
+  background: var(--white);
+  color: var(--teal);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  font-weight: 700;
+}
+.team-btn:hover {
+  background: var(--teal);
+  color: var(--white);
+  transform: scale(1.08);
+}
+.team-dots { display: flex; gap: 8px; align-items: center; }
+.team-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--teal-light);
+  border: 2px solid var(--teal);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.team-dot.active {
+  background: var(--teal);
+  transform: scale(1.3);
+}
+
+@media (max-width: 900px) {
+  .team-card { flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
+  .team-photo-wrap { width: 130px; height: 160px; }
 }

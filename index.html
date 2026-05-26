@@ -22,7 +22,7 @@
     <li><a href="#team">Our Collaborators</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#faq">FAQs</a></li>
-  
+    <li><a href="#contact" class="nav-cta">Book a Session</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Open menu">
     <span></span><span></span><span></span>
@@ -140,13 +140,8 @@
       children aged 2–18 years — blending behavioural science with creativity,
       play, and compassion.
     </p>
-    <div class="hero-services">
-      <span class="service-pill">🧠 Developmental Services</span>
-      <span class="service-pill">⭐ Behaviour Therapy</span>
-      <span class="service-pill">💚 Mental Health Counseling</span>
-    </div>
     <div class="hero-btns">
-      <a href="#contact" class="btn-primary">Book a Free 30-min Consult</a>
+      <a href="#contact" class="btn-primary">Book a Free Consult</a>
       <a href="#services" class="btn-secondary">Our Services</a>
     </div>
   </div>
@@ -289,6 +284,12 @@
       </div>
       <h3 class="hwh-card-title">Individual &amp; Group Support</h3>
       <p class="hwh-card-desc">Personalized therapy and small group programs that build skills, confidence, and independence.</p>
+      <button class="hwh-show-more" onclick="var d=this.nextElementSibling; d.classList.toggle('open'); this.textContent = d.classList.contains('open') ? 'Show less ↑' : 'Show more ↓'">Show more ↓</button>
+      <div class="hwh-expand">
+        <span class="hwh-expand-pill">🧠 Developmental Services</span>
+        <span class="hwh-expand-pill">⭐ Behaviour Therapy</span>
+        <span class="hwh-expand-pill">💚 Mental Health Counseling</span>
+      </div>
       <a href="#contact" class="hwh-learn-more">Learn more →</a>
     </div>
 
@@ -635,7 +636,7 @@
           <div class="contact-icon">📸</div>
           <div>
             <span class="contact-label">Instagram</span>
-            <a href="https://instagram.com/littlewinscenter" target="_blank" class="contact-value" style="color:var(--white); text-decoration:none;">@littlewinscenter</a>
+            <span class="contact-value">@littlewinscenter</span>
           </div>
         </div>
       </div>

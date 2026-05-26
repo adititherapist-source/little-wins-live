@@ -1209,3 +1209,47 @@ footer {
 @media (max-width: 600px) {
   .hwh-cards { grid-template-columns: 1fr; }
 }
+
+/* ── EXPANDABLE PILLS UNDER SERVICE CARD ── */
+.hwh-expand {
+  display: none;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.8rem;
+  justify-content: center;
+}
+.hwh-expand.open { display: flex; }
+.hwh-expand-pill {
+  background: var(--teal-light);
+  color: var(--teal-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 1.5px solid var(--teal);
+  white-space: nowrap;
+}
+
+/* ── SHOW MORE TOGGLE BUTTON ── */
+.hwh-show-more {
+  background: none;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--teal);
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s;
+  text-align: center;
+}
+.hwh-show-more:hover { color: var(--teal-dark); }
+
+/* Consistent card height & layout across all core service cards */
+.hwh-card {
+  min-height: 280px;
+  justify-content: flex-start;
+}
+.hwh-card-desc { margin-bottom: 0.8rem; }
+.hwh-learn-more { margin-top: auto; padding-top: 0.8rem; }

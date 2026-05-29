@@ -1,7 +1,5 @@
 /* =============================================
    LITTLE WINS — script.js
-   FAQ accordion, nav, hamburger, WhatsApp form,
-   scroll reveal, button press effects
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,33 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Hamburger mobile menu ── */
   const hamburger  = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
-
-  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-
+  if (hamburger) hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
   document.querySelectorAll('.mob-link').forEach(link => {
     link.addEventListener('click', () => mobileMenu.classList.remove('open'));
   });
 
   /* ── WhatsApp contact form ── */
-  document.getElementById('wa-submit').addEventListener('click', () => {
-    const name  = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const age   = document.getElementById('f-age').value;
-    const msg   = document.getElementById('f-msg').value.trim();
+  const waBtn = document.getElementById('wa-submit');
+  if (waBtn) {
+    waBtn.addEventListener('click', () => {
+      const name  = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const age   = document.getElementById('f-age').value;
+      const msg   = document.getElementById('f-msg').value.trim();
+      let text = 'Hello! I found you through your website and would like to enquire about your services.\n\n';
+      if (name)  text += `*Name:* ${name}\n`;
+      if (email) text += `*Email:* ${email}\n`;
+      if (age)   text += `*Child's age:* ${age}\n`;
+      if (msg)   text += `\n*Message:* ${msg}`;
+      window.open('https://wa.me/919920215029?text=' + encodeURIComponent(text), '_blank');
+    });
+  }
 
-    let text = 'Hello! I found you through your website and would like to enquire about your services.\n\n';
-    if (name)  text += `*Name:* ${name}\n`;
-    if (email) text += `*Email:* ${email}\n`;
-    if (age)   text += `*Child\'s age:* ${age}\n`;
-    if (msg)   text += `\n*Message:* ${msg}`;
-
-    const url = 'https://wa.me/919920215029?text=' + encodeURIComponent(text);
-    window.open(url, '_blank');
-  });
-
-  /* ── Scroll reveal (IntersectionObserver) ── */
-
-  // Make sure every direct child of a stagger-children grid has a reveal class
+  /* ── Scroll reveal ── */
   document.querySelectorAll('.stagger-children').forEach(grid => {
     Array.from(grid.children).forEach(child => {
       const hasReveal = ['reveal','reveal-left','reveal-right','reveal-pop']
@@ -69,40 +63,55 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-pop')
     .forEach(el => revealObserver.observe(el));
 
-  /* ── Bouncy button press effect ── */
+  /* ── Bouncy button press ── */
   document.querySelectorAll('.btn-primary, .btn-secondary, .form-submit').forEach(btn => {
     btn.addEventListener('mousedown',  () => { btn.style.transform = 'scale(0.96)'; });
     btn.addEventListener('mouseup',    () => { btn.style.transform = ''; });
     btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 
-});
-
-  /* ── Team Slider ── */
-  const slider = document.getElementById('teamSlider');
-  const dots   = document.querySelectorAll('.team-dot');
-  const prevBtn = document.getElementById('teamPrev');
-  const nextBtn = document.getElementById('teamNext');
-  let current = 0;
-  const total = document.querySelectorAll('.team-card').length;
-
-  function goTo(idx) {
-    current = (idx + total) % total;
-    slider.style.transform = `translateX(-${current * 100}%)`;
-    slider.style.transition = 'transform 0.45s cubic-bezier(0.34,1.1,0.64,1)';
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
-  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
-
-  // Swipe support for mobile
-  let touchStartX = 0;
-  if (slider) {
-    slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    slider.addEventListener('touchend',   e => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+  /* ── Show more toggle (Individual & Group card) ── */
+  document.querySelectorAll('.hwh-show-more').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expand = btn.nextElementSibling;
+      expand.classList.toggle('open');
+      btn.textContent = expand.classList.contains('open') ? 'Show less ↑' : 'Show more ↓';
     });
+  });
+
+  /* ── Collaborator modal ── */
+  const modal      = document.getElementById('collabModal');
+  const modalClose = document.getElementById('collabClose');
+  const modalImg   = document.getElementById('collabModalImg');
+  const modalName  = document.getElementById('collabModalName');
+  const modalTitle = document.getElementById('collabModalTitle');
+  const modalBio   = document.getElementById('collabModalBio');
+
+  document.querySelectorAll('.collab-learn-more:not([disabled])').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card  = btn.closest('.collab-card');
+      const img   = card.querySelector('.collab-photo img');
+      modalImg.src       = img ? img.src : '';
+      modalImg.alt       = card.dataset.name || '';
+      modalName.textContent  = card.dataset.name  || '';
+      modalTitle.innerHTML   = card.dataset.title || '';
+      modalBio.textContent   = card.dataset.bio   || '';
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
   }
+
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modal) modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+});

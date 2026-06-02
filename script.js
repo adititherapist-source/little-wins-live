@@ -73,7 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── Show more toggle (Individual & Group card) ── */
   document.querySelectorAll('.hwh-show-more').forEach(btn => {
     btn.addEventListener('click', () => {
-      const expand = btn.nextElementSibling;
+      const card   = btn.closest('.hwh-card');
+      const expand = card.querySelector('.hwh-expand');
+      if (!expand) return;
       expand.classList.toggle('open');
       btn.textContent = expand.classList.contains('open') ? 'Show less ↑' : 'Show more ↓';
     });

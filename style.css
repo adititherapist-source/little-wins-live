@@ -1515,8 +1515,7 @@ footer {
   font-size: 0.88rem;
   color: var(--teal);
   text-align: center;
-  margin-top: 0.3rem;
-  margin-bottom: 0.8rem;
+  margin-top: -0.6rem;
 }
 .collab-modal-bio {
   font-size: 0.9rem;
@@ -1528,4 +1527,23 @@ footer {
 @media (max-width: 600px) {
   .collab-grid { grid-template-columns: 1fr 1fr; }
   .collab-modal { padding: 1.5rem; }
+}
+
+/* ── ENQUIRE ABOUT TRAINING BUTTON ── */
+.collab-enquire-btn {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 7px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  margin-top: 0.4rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.collab-enquire-btn:hover {
+  background: var(--teal-dark);
+  transform: translateY(-2px);
 }
